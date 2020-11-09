@@ -1,0 +1,56 @@
+<UserControl x:Class="Hardware.Views.ChillerHardwareView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Hardware"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="true"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            
+            <Button Margin="0,0,0,5" Content="Open" Command="{Binding OpenDeviceCommand}"/>
+            <Button Margin="0,0,0,5" Content="GetVersion" Command="{Binding GetVersionCommand}"/>
+            <Button Margin="0,0,0,5" Content="GetFeedback" Command="{Binding GetFeedbackCommand}"/>
+            <Button Margin="0,0,0,5" Content="Close" Command="{Binding CloseDeviceCommand}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+
+            <Button Margin="0,0,0,5" Content="SetPoint" Command="{Binding SetSetPointCommand}"/>
+            <TextBox Margin="0,0,0,5" Text="{Binding SetPoint, StringFormat=0.00}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="{Binding ChillerFeedback.TimeStamp}"/>
+            <TextBlock Text="{Binding ChillerFeedback.InTemperature}"/>
+            <TextBlock Text="{Binding ChillerFeedback.OutTemperature}"/>
+            <TextBlock Text="{Binding ChillerFeedback.TargetTemperature}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Label Content="{Binding Title}" />
+            <TextBlock Text="{Binding Chiller.Driver.DeviceInfo.PID, StringFormat={}PID 0x{0:X4}}"/>
+            <TextBlock Text="{Binding Chiller.Driver.DeviceInfo.VID, StringFormat={}VID 0x{0:X4}}"/>
+            <TextBlock Text="{Binding Chiller.Driver.DeviceInfo.Manufacturer, StringFormat=Manufacturer {0}}"/>
+            <TextBlock Text="{Binding Chiller.Driver.DeviceInfo.Product, StringFormat=Product {0}}"/>
+            <TextBlock Text="{Binding Chiller.Driver.DeviceInfo.Ready, StringFormat=Open {0}}"/>
+            <TextBlock Text="{Binding Version, StringFormat=Version {0}}"/>
+        </StackPanel>
+        
+        
+        
+    </Grid>
+</UserControl>
