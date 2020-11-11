@@ -38,6 +38,13 @@ namespace TestGui.Core.UsbDriver
             if (!Driver.IsOpen)
             {
                 Driver.Open();
+                IUsbDevice wholeUsbDevice = Driver as IUsbDevice;
+                if( !ReferenceEquals(wholeUsbDevice, null))
+                {
+                    wholeUsbDevice.Open();
+                    wholeUsbDevice.SetConfiguration(1);
+                    wholeUsbDevice.ClaimInterface(0);
+                }
                 //Get the first config number of the interface
                 Driver.ClaimInterface(Driver.Configs[0].Interfaces[0].Number);
                 EndpointWriter = Driver.OpenEndpointWriter(WriteEndpointID.Ep01);
@@ -54,6 +61,13 @@ namespace TestGui.Core.UsbDriver
         {
             if (Driver.IsOpen)
             {
+                
+                IUsbDevice wholeUsbDevice = Driver as IUsbDevice;
+                if (!ReferenceEquals(wholeUsbDevice, null))
+                {
+                    // Release interface #0.
+                    wholeUsbDevice.ReleaseInterface(0);
+                }
                 Driver.Close();
             }
             DeviceInfo.Ready = Driver.IsOpen;

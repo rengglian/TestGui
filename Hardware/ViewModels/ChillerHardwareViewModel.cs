@@ -57,9 +57,9 @@ namespace Hardware.ViewModels
         {
             Title = "Chiller Hardware Module";
 
-            test.FindUsbDevice();
+            //test.FindUsbDevice();
 
-            //Chiller = new Chiller();
+            Chiller = new Chiller();
 
             OpenDeviceCommand = new DelegateCommand(OpenDeviceHandler);
             GetVersionCommand = new DelegateCommand(GetVersionHandler);
