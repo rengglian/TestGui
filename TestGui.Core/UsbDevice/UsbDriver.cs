@@ -22,12 +22,15 @@ namespace TestGui.Core.UsbDriver
 
             Driver = usbDeviceCollection.FirstOrDefault(d => d.ProductId == pid && d.VendorId == vid);
 
-            DeviceInfo = new UsbDriverInformation
-            {
-                PID = pid,
-                VID = vid,
-                Ready = Driver.IsOpen
-            };
+            if (Driver != null)
+            { 
+                DeviceInfo = new UsbDriverInformation
+                {
+                    PID = pid,
+                    VID = vid,
+                    Ready = Driver.IsOpen
+                };
+            }
         }
 
         public void Open()

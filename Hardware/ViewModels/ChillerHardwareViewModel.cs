@@ -1,4 +1,5 @@
 ﻿using Hardware.ChillerController;
+using TestGui.Core.DeviceNet;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -50,10 +51,15 @@ namespace Hardware.ViewModels
             set { SetProperty(ref _setPoint, value); }
         }
 
+        private DeviceDriver test = new DeviceDriver();
+
         public ChillerHardwareViewModel()
         {
             Title = "Chiller Hardware Module";
-            Chiller = new Chiller();
+
+            test.FindUsbDevice();
+
+            //Chiller = new Chiller();
 
             OpenDeviceCommand = new DelegateCommand(OpenDeviceHandler);
             GetVersionCommand = new DelegateCommand(GetVersionHandler);
