@@ -51,7 +51,7 @@ namespace Hardware.ViewModels
             set { SetProperty(ref _setPoint, value); }
         }
 
-        private DeviceDriver test = new DeviceDriver();
+        //private DeviceDriver test = new DeviceDriver();
 
         public ChillerHardwareViewModel()
         {

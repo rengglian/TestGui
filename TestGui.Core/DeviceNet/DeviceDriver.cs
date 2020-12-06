@@ -10,19 +10,27 @@ using Usb.Net.Windows;
 
 namespace TestGui.Core.DeviceNet
 {
-
-    public static class GetFactoryExtensions
+    public class DeviceDriver : IDisposable
     {
-        public static IDeviceFactory GetUsbDeviceFactory(this FilterDeviceDefinition filterDeviceDefinition) =>
 
-            filterDeviceDefinition.CreateWindowsUsbDeviceFactory();
-
-    }
-
-    public class DeviceDriver
-    {
         private static readonly uint VENDOR_ID = 0x0483;
         private static readonly uint PRODUCT_ID = 0x5716;
+        private const int PollMilliseconds = 3000;
+
+        public IDevice SubSystemDevice { get; private set; }
+        public IDeviceFactory DeviceManager { get; }
+        public DeviceListener DeviceListener { get; }
+
+        public static readonly List<FilterDeviceDefinition> UsbDeviceDefinitions = new List<FilterDeviceDefinition>
+        {
+            new FilterDeviceDefinition( vendorId: VENDOR_ID, productId:PRODUCT_ID, label:"Chiller Test" )
+        };
+
+        public DeviceDriver(IDeviceFactory deviceManager, ILoggerFactory loggerFactory)
+        {
+            DeviceManager = deviceManager;
+            DeviceListener = new DeviceListener((IDeviceManager)deviceManager, PollMilliseconds, loggerFactory);
+        }
 
         public async Task FindUsbDevice()
         {
@@ -44,5 +52,9 @@ namespace TestGui.Core.DeviceNet
 
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

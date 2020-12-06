@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Device.Net" Version="4.0.0-alpha" />
-    <PackageReference Include="LibUsbDotNet" Version="3.0.81-alpha" />
+    <PackageReference Include="LibUsbDotNet" Version="3.0.87-alpha" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
     <PackageReference Include="Usb.Net" Version="4.0.1-alpha" />
   </ItemGroup>

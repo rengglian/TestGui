@@ -1,4 +1,5 @@
-﻿using LibUsbDotNet.LibUsb;
+﻿using LibUsbDotNet;
+using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
 using System;
 using System.Collections.Generic;
