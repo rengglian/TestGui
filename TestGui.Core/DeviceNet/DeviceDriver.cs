@@ -1,4 +1,5 @@
 ﻿using Device.Net;
+using Device.Net.Windows;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,6 @@ namespace TestGui.Core.DeviceNet
         {
             new FilterDeviceDefinition( vendorId: VENDOR_ID, productId:PRODUCT_ID, label:"Chiller Test" )
         };
-
-        public DeviceDriver(IDeviceFactory deviceManager, ILoggerFactory loggerFactory)
-        {
-            DeviceManager = deviceManager;
-            DeviceListener = new DeviceListener((IDeviceManager)deviceManager, PollMilliseconds, loggerFactory);
-        }
 
         public async Task FindUsbDevice()
         {

@@ -26,28 +26,28 @@ namespace Hardware.ChillerController
             Driver.Close();
         }
 
-        public ChillerFeedback CMD_GET_FEEDBACK()
+        public static ChillerFeedback CMD_GET_FEEDBACK()
         {
             var cmdBuffer = new byte[64];
             cmdBuffer[0] = 0;
 
-            var response = Driver.CMD(cmdBuffer);
+            var response = UsbDriver.CMD(cmdBuffer);
 
             return new ChillerFeedback(response);
         }
 
-        public string CMD_GET_VERSION()
+        public static string CMD_GET_VERSION()
         {
             var cmdBuffer = new byte[64];
             cmdBuffer[0] = 6;
 
-            var response = Driver.CMD(cmdBuffer);
+            var response = UsbDriver.CMD(cmdBuffer);
 
             var version = new ControllerVersion(response);
             return version.ToString();
         }
 
-        public void CMD_SET_SETPOINT(double setpoint)
+        public static void CMD_SET_SETPOINT(double setpoint)
         {
             UInt16 payload = (UInt16)(setpoint * 100);
             var cmdBuffer = new byte[64];
@@ -55,7 +55,7 @@ namespace Hardware.ChillerController
             cmdBuffer[1] = (byte)(payload >> 8);
             cmdBuffer[2] = (byte)(payload & 0xff);
 
-            Driver.CMD(cmdBuffer);
+            UsbDriver.CMD(cmdBuffer);
 
         }
     }

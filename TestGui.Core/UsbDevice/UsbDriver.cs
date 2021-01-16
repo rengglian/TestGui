@@ -40,7 +40,7 @@ namespace TestGui.Core.UsbDriver
             {
                 Driver.Open();
                 IUsbDevice wholeUsbDevice = Driver as IUsbDevice;
-                if( !ReferenceEquals(wholeUsbDevice, null))
+                if( wholeUsbDevice is not null)
                 {
                     wholeUsbDevice.Open();
                     wholeUsbDevice.SetConfiguration(1);
@@ -64,7 +64,7 @@ namespace TestGui.Core.UsbDriver
             {
                 
                 IUsbDevice wholeUsbDevice = Driver as IUsbDevice;
-                if (!ReferenceEquals(wholeUsbDevice, null))
+                if (wholeUsbDevice is not null)
                 {
                     // Release interface #0.
                     wholeUsbDevice.ReleaseInterface(0);
@@ -74,7 +74,7 @@ namespace TestGui.Core.UsbDriver
             DeviceInfo.Ready = Driver.IsOpen;
         }
 
-        public byte[] CMD(byte[] cmdBuffer)
+        public static byte[] CMD(byte[] cmdBuffer)
         {
             if (Driver.IsOpen)
             {
@@ -87,7 +87,7 @@ namespace TestGui.Core.UsbDriver
                 return readBuffer;
             }
             
-            return new byte[0];
+            return Array.Empty<byte>();
         }
     }
 }
